@@ -21,6 +21,6 @@
 # end
 
 package "media-gfx/jhead" do
-  version '2.87'
+  version '2.86'
   action :install
 end

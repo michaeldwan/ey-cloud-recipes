@@ -36,5 +36,5 @@ user "root"
   make
   make install
   EOH
-  # not_if { File.directory?('/usr/local/mongodb') }
+  not_if { File.exist?('/usr/bin/jhead') }
 end

@@ -20,6 +20,7 @@
 #   not_if "grep 'export PATH=$PATH:/usr/local/mongodb/bin' /etc/profile"
 # end
 
-package "media-gfx/jhead-2.87" do
+package "media-gfx/jhead" do
+  version '2.87'
   action :install
 end

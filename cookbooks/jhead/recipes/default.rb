@@ -20,7 +20,21 @@
 #   not_if "grep 'export PATH=$PATH:/usr/local/mongodb/bin' /etc/profile"
 # end
 
-package "media-gfx/jhead" do
-  version '2.86'
-  action :install
+# package "media-gfx/jhead" do
+#   version '2.86'
+#   action :install
+# end
+
+bash "install_something" do
+user "root"
+  cwd "/tmp"
+  code <<-EOH 
+  wget http://www.sentex.net/~mwandel/jhead/jhead-2.87.tar.gz
+  tar -zxf jhead-2.87.tar.gz
+  cd jhead-2.87
+  ./configure
+  make
+  make install
+  EOH
+  # not_if { File.directory?('/usr/local/mongodb') }
 end

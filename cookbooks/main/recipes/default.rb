@@ -6,6 +6,8 @@ end
 
 require_recipe 'delayed_job'
 
+require_recipe 'jhead'
+
 # uncomment if you want to run couchdb recipe
 # require_recipe "couchdb"
 

@@ -1,4 +1,0 @@
-check process <%= @worker_name %>
-  with pidfile /data/<%= @app_name %>/shared/pids/<%= @worker_name %>.pid
-  start program = "/bin/su -c 'rake -f /data/<%= @app_name %>/current/Rakefile flare:solr:start' - <%= @user %>"
-  start program = "/bin/su -c 'rake -f /data/<%= @app_name %>/current/Rakefile flare:solr:stop' - <%= @user %>"

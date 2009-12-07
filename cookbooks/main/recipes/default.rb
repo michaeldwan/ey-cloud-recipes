@@ -4,11 +4,7 @@ execute "testing" do
   }
 end
 
-# require_recipe 'delayed_job'
-
-# require_recipe 'jhead'
-
-require_recipe 'flare-solr'
+require_recipe 'flare'
 
 # uncomment if you want to run couchdb recipe
 # require_recipe "couchdb"

@@ -17,8 +17,8 @@ if ['solo', 'app', 'app_master'].include?(node[:instance_role])
       mode 0755
     end
  
-    template "/etc/monit.d/solr.#{app_name}.monitrc" do
-      source "solr.monitrc.erb"
+    template "/etc/monit.d/flare-solr.#{app_name}.monitrc" do
+      source "flare-solr.monitrc.erb"
       #owner node[:owner_name]
       #group node[:owner_name]
       owner "root"

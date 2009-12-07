@@ -8,7 +8,7 @@ end
 
 # require_recipe 'jhead'
 
-require_recipe 'flare'
+require_recipe 'flare-solr'
 
 # uncomment if you want to run couchdb recipe
 # require_recipe "couchdb"

@@ -1,0 +1,5 @@
+check process sphinx_<%= @app_name %>
+  with pidfile /data/<%= @app_name %>/shared/pids/flare-solr.pid
+  start program = "rake -f /data/<%= @app_name %>/current/Rakefile flare:solr:start" as uid <%= @user %> and gid <%= @user %>
+  start program = "rake -f /data/<%= @app_name %>/current/Rakefile flare:solr:stop" as uid <%= @user %> and gid <%= @user %>  
+  group solr_<%= @app_name %>

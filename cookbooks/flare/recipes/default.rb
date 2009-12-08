@@ -9,6 +9,20 @@ if ['solo', 'app', 'app_master'].include?(node[:instance_role])
 
   # be sure to replace "app_name" with the name of your application.
   run_for_app("fave") do |app_name, data|
+    directory "/db/solr/index" do
+      recursive true
+      owner node[:owner_name]
+      group node[:owner_name]
+      mode 0755
+    end
+
+    directory "/db/solr/log" do
+      recursive true
+      owner node[:owner_name]
+      group node[:owner_name]
+      mode 0755
+    end
+    
     template "/etc/monit.d/solr.#{app_name}.monitrc" do
       source "solr.monitrc.erb"
       owner node[:owner_name]

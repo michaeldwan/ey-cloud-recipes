@@ -34,10 +34,5 @@ if ['solo', 'app', 'app_master'].include?(node[:instance_role])
         :framework_env => node[:environment][:framework_env]
       })
     end
-    
-    bash "monit-reload-restart" do
-       user "root"
-       code "pkill -9 monit && monit"
-    end 
   end
 end

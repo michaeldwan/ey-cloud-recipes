@@ -1,5 +1,5 @@
 check process solr_<%= @app_name %>
   with pidfile /data/<%= @app_name %>/shared/pids/flare-solr.pid
-  start program = "RAILS_ENV=production /usr/bin/rake -f /data/<%= @app_name %>/current/Rakefile flare:solr:start" as uid <%= @user %> and gid <%= @user %>
-  stop program = "RAILS_ENV=production /usr/bin/rake -f /data/<%= @app_name %>/current/Rakefile flare:solr:stop" as uid <%= @user %> and gid <%= @user %>  
+  start program = "/bin/su -c 'RAILS_ENV=<%= @framework_env %> /usr/bin/rake -f /data/fave/current/Rakefile flare:solr:start' - <%= @user %>"
+  stop program = "/bin/su -c 'RAILS_ENV=<%= @framework_env %> /usr/bin/rake -f /data/fave/current/Rakefile flare:solr:stop' - <%= @user %>"
   group solr_<%= @app_name %>

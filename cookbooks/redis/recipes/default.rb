@@ -2,42 +2,50 @@
 # Cookbook Name:: redis
 # Recipe:: default
 #
-package "dev-db/redis" do
-  action :install
-end
+require 'pp'
 
+if ['solo', 'app', 'app_master'].include?(node[:instance_role])
 
-template "/etc/redis.conf" do
-  owner 'root'
-  group 'root'
-  mode 0644
-  source "redis.conf.erb"
-  variables({
-    :basedir => '/data/redis',
-    :logfile => '/data/redis/redis.log',
-    :bind_address => '127.0.0.1', # '0.0.0.0' if you want redis available to the outside world
-    :port  => '6379',# change if you want to listen on another port
-    :loglevel => 'notice',
-    :timeout => 3000,
-    :sharedobjects => 'no'
-  })
-end
+  # be sure to replace "app_name" with the name of your application.
+  run_for_app("fave") do |app_name, data|
 
-directory "/data/redis" do
-  owner node[:owner_name]
-  group node[:owner_name]
-  mode 0755
-  recursive true
-end
+    package "dev-db/redis" do
+      action :install
+    end
 
-gem_package "ezmobius-redis-rb" do
-  source "http://gems.github.com"
-  action :install
-end
+    template "/etc/redis.conf" do
+      owner 'root'
+      group 'root'
+      mode 0644
+      source "redis.conf.erb"
+      variables({
+        :basedir => '/data/redis',
+        :logfile => '/data/redis/redis.log',
+        :bind_address => '127.0.0.1', # '0.0.0.0' if you want redis available to the outside world
+        :port  => '6379',# change if you want to listen on another port
+        :loglevel => 'notice',
+        :timeout => 3000,
+        :sharedobjects => 'no'
+      })
+    end
 
-execute "ensure-redis-is-running" do
-  command %Q{
-    /usr/bin/redis-server /etc/redis.conf
-  }
-  not_if "pgrep redis-server"
+    directory "/data/redis" do
+      owner node[:owner_name]
+      group node[:owner_name]
+      mode 0755
+      recursive true
+    end
+
+    gem_package "ezmobius-redis-rb" do
+      source "http://gems.github.com"
+      action :install
+    end
+
+    execute "ensure-redis-is-running" do
+      command %Q{
+        /usr/bin/redis-server /etc/redis.conf
+      }
+      not_if "pgrep redis-server"
+    end
+  end
 end
